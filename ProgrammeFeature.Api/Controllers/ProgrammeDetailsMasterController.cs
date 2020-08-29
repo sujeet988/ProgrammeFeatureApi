@@ -31,7 +31,7 @@ namespace ProgrammeFeature.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostProgrammeDetailsMasterData(ProgrammeDetailsMaster programmeDetailsMaster)
+        public IActionResult PostProgrammeDetailsMasterData([FromBody] ProgrammeDetailsMaster programmeDetailsMaster)
         {
             var i = _programmeDetailsMaster.Save(programmeDetailsMaster);
             return Ok(i);

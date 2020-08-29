@@ -38,6 +38,17 @@ namespace ProgrammeFeature.Api
 
             services.AddScoped<IProgrammeDetailsMaster, ProgrammeDetailsMasterService>();
 
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Place Info Service API",
+                    Version = "v2",
+                    Description = "Sample service for Learner",
+                });
+            });
+
+
 
 
         }
@@ -56,10 +67,16 @@ namespace ProgrammeFeature.Api
 
             app.UseAuthorization();
 
+           
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v2/swagger.json", "PlaceInfo Services"));
+
         }
     }
 }
