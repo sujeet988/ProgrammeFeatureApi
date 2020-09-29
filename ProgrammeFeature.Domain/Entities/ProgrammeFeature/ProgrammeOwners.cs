@@ -5,6 +5,7 @@ namespace ProgrammeFeature.Domain.Entities.ProgrammeFeature
 {
     public partial class ProgrammeOwners
     {
+
         public long Id { get; set; }
         public long ProgrammeId { get; set; }
         public string ProgrammeOwner { get; set; }
