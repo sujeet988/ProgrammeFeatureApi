@@ -11,7 +11,9 @@ namespace ProgrammeFeature.Business.InterFaces
 
         int Save(ProgrammeDetailsMaster programmeDetailsMaster);
 
-        List<ProgrammeDetailsMaster> Get();
+        List<ProgrammeDetailsMaster> GetProgrammeDetailsMaster();
+        List<GroupMaster> GetGroups();
+        List<ProjectMaster> GetAllProjectByGroupid(int groupid);
 
 
     }

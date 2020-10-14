@@ -24,6 +24,37 @@ namespace ProgrammeFeature.Business.Services
 
         }
 
+        public List<ProjectMaster> GetAllProjectByGroupid(int Groupid)
+        {
+            try
+            {
+                return _programmefeatureContext.ProjectMasters.Where(x => x.Groupid == Groupid).ToList();
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<GroupMaster> GetGroups()
+        {
+            try
+            {
+                return _programmefeatureContext.GroupMaster.ToList();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+
+        public List<ProgrammeDetailsMaster> GetProgrammeDetailsMaster()
+        {
+            throw new NotImplementedException();
+        }
+
         public int Save(ProgrammeDetailsMaster programmeDetailsMaster)
         {
             using (_programmefeatureContext)

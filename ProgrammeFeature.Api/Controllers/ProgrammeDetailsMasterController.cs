@@ -23,10 +23,28 @@ namespace ProgrammeFeature.Api.Controllers
 
         }
 
+
+        [HttpGet("GroupDetails")]
+        public IActionResult GroupDetails()
+        {
+            List<GroupMaster> groupMasters = _programmeDetailsMaster.GetGroups();
+            return Ok(groupMasters);
+
+        }
+
+        [HttpGet("ProjectDetailsByGroup/{groupid}")]
+        public IActionResult ProjectDetailsByGroup(int groupid)
+        {
+            List<ProjectMaster> projectMasters = _programmeDetailsMaster.GetAllProjectByGroupid(groupid);
+            return Ok( projectMasters);
+
+        }
+
+
         [HttpGet]
         public IActionResult GetProgrammeDetailsMasterData()
         {
-            List<ProgrammeDetailsMaster> programmeDetailsMasters = _programmeDetailsMaster.Get();
+            List<ProgrammeDetailsMaster> programmeDetailsMasters = _programmeDetailsMaster.GetProgrammeDetailsMaster();
             return Ok(programmeDetailsMasters);
         }
 
@@ -36,6 +54,7 @@ namespace ProgrammeFeature.Api.Controllers
             var i = _programmeDetailsMaster.Save(programmeDetailsMaster);
             return Ok(i);
         }
+
 
 
 

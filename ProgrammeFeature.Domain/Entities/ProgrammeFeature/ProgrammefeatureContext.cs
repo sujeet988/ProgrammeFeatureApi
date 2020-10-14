@@ -21,13 +21,15 @@ namespace ProgrammeFeature.Domain.Entities.ProgrammeFeature
         public virtual DbSet<ProgrammeOwners> ProgrammeOwners { get; set; }
         public virtual DbSet<ProgrammePortfolio> ProgrammePortfolio { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<GroupMaster> GroupMaster { get; set; }
+        public virtual DbSet<ProjectMaster> ProjectMasters { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-RRK329U;Database=Programmefeature;Trusted_Connection=True;");
+              //  optionsBuilder.UseSqlServer("Server=DESKTOP-RRK329U;Database=Programmefeature;Trusted_Connection=True;");
             }
         }
 
@@ -135,6 +137,33 @@ namespace ProgrammeFeature.Domain.Entities.ProgrammeFeature
                     .HasMaxLength(30)
                     .IsUnicode(false);
             });
+
+            modelBuilder.Entity<GroupMaster>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<ProjectMaster>(entity =>
+            {
+                entity.ToTable("projectMaster");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Group)
+                    .WithMany(p => p.ProjectMaster)
+                    .HasForeignKey(d => d.Groupid)
+                    .HasConstraintName("FK__projectMa__Group__1AD3FDA4");
+            });
+
+
 
             OnModelCreatingPartial(modelBuilder);
         }
